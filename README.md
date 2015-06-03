@@ -4,7 +4,11 @@
 
 [![Build Status][travis-badge]][travis] [![Dependency Status][david-badge]][david]
 
-Fetch files and list directories via GitHub API.
+Fetches files and lists directories from GitHub repositories. Decodes base64.
+
+[Relevant GitHub API section.][api-section]
+
+[api-section]: https://developer.github.com/v3/repos/contents/#get-contents
 
 [travis]: https://travis-ci.org/eush77/github-get
 [travis-badge]: https://travis-ci.org/eush77/github-get.svg
