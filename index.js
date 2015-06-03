@@ -10,7 +10,7 @@ module.exports = function (owner, repo, path, cb) {
   }
 
   if (path[0] == '/') {
-    path.splice(0, 1);
+    path = path.slice(1);
   }
 
   github(['repos', owner, repo, 'contents', path].join('/'), {

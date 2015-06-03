@@ -15,6 +15,14 @@ Fetch files and list directories via GitHub API.
 
 `path` defaults to `/`.
 
+## CLI
+
+### `github-get <user> <repo> [<path>]`
+
+Lists directory or cats file contents at `<path>`.
+
+`<path>` defaults to `/`.
+
 ## Install
 
 ```

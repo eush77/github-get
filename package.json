@@ -4,8 +4,12 @@
   "description": "Fetch files and list directories via GitHub API",
   "author": "Eugene Sharygin <eush77@gmail.com>",
   "license": "MIT",
+  "bin": {
+    "github-get": "cli.js"
+  },
   "files": [
-    "index.js"
+    "index.js",
+    "cli.js"
   ],
   "homepage": "https://github.com/eush77/github-get",
   "repository": {
@@ -26,7 +30,8 @@
     "repository"
   ],
   "dependencies": {
-    "gh-got": "^1.1.0"
+    "gh-got": "^1.1.0",
+    "help-version": "^0.2.0"
   },
   "devDependencies": {}
 }
