@@ -10,26 +10,53 @@ githubGet.__set__('github', function (path, options, cb) {
 });
 
 
-test(function (t) {
-  t.plan(8);
+test('no path no options', function (t) {
+  t.plan(4);
 
-  githubGet('owner', 'repo', function (path, options) {
+  githubGet('owner', 'repo', callback);
+  githubGet('owner/repo', callback);
+
+  function callback(path, options) {
     t.equal(path, 'repos/owner/repo/contents/');
-    t.deepEqual(options, {});
-  });
+    t.false(options.token, 'should not be present');
+  }
+});
 
-  githubGet('owner', 'repo', '/some/file', function (path, options) {
+
+test('path no options', function (t) {
+  t.plan(4);
+
+  githubGet('owner', 'repo', '/some/file', callback);
+  githubGet('owner/repo', '/some/file', callback);
+
+  function callback(path, options) {
     t.equal(path, 'repos/owner/repo/contents/some/file');
-    t.deepEqual(options, {});
-  });
+    t.false(options.token, 'should not be present');
+  }
+});
 
-  githubGet('owner', 'repo', { token: 'token' }, function (path, options) {
+
+test('no path options', function (t) {
+  t.plan(4);
+
+  githubGet('owner', 'repo', { token: 'token' }, callback);
+  githubGet('owner/repo', { token: 'token' }, callback);
+
+  function callback(path, options) {
     t.equal(path, 'repos/owner/repo/contents/');
-    t.deepEqual(options, { token: 'token' });
-  });
+    t.equal(options.token, 'token');
+  }
+});
 
-  githubGet('owner', 'repo', 'some/file', { token: 'token' }, function (path, options) {
+
+test('path options', function (t) {
+  t.plan(4);
+
+  githubGet('owner', 'repo', 'some/file', { token: 'token' }, callback);
+  githubGet('owner/repo', 'some/file', { token: 'token' }, callback);
+
+  function callback(path, options) {
     t.equal(path, 'repos/owner/repo/contents/some/file');
-    t.deepEqual(options, { token: 'token' });
-  });
+    t.equal(options.token, 'token');
+  }
 });

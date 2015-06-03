@@ -13,9 +13,25 @@ Fetch files and list directories via GitHub API.
 
 ## API
 
-### `githubGet(owner, repo, [path], callback(err, data))`
+### `githubGet(owner, repo, [path], [options], callback(err, data))`
+### `githubGet("owner/repo", [path], [options], callback(err, data))`
 
-`path` defaults to `/`.
+#### `path`
+
+Path to file in repository. Defaults to `/` (root).
+
+#### `options.token`
+
+GitHub token for authentication. Unauthenticated requests to GitHub API are [limited][rate-limiting] to only 60 requests per hour.
+
+[Generate your token][new-token].
+
+[rate-limiting]: https://developer.github.com/v3/#rate-limiting
+[new-token]: https://github.com/settings/tokens/new
+
+#### `options.endpoint`
+
+Defaults to `https://api.github.com/`.
 
 ## CLI
 

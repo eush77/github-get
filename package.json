@@ -34,7 +34,8 @@
   ],
   "dependencies": {
     "gh-got": "^1.1.0",
-    "help-version": "^0.2.0"
+    "help-version": "^0.2.0",
+    "object.assign": "^3.0.0"
   },
   "devDependencies": {
     "rewire": "^2.3.3",
