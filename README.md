@@ -17,19 +17,24 @@ Fetches files and lists directories from GitHub repositories. Decodes base64.
 
 ## Example
 
-```
+```js
 var githubGet = require('github-get');
 
 githubGet('octocat/git-consortium', function (err, data) {
   data
   //=> [{ name: 'LICENSE', type: 'file', size: 1077, ... },
-  //    { name: 'README.md', type: 'file, size: 306, ... },
+  //    { name: 'README.md', type: 'file', size: 306, ... },
   //    { name: 'product-backlog.md', type: 'file', size: 13031, ... }]
 });
 
 githubGet('octocat/git-consortium', 'LICENSE', function (err, data) {
   data
-  //=> { name: 'LICENSE', type: 'file', size: 1077, ... }
+  //=> { name: 'LICENSE', size: 1077, content: 'VGhlIE1JVCBMaWNlbnNl...', ... }
+});
+
+githubGet('octocat/git-consortium', 'LICENSE', { decode: true }, function (err, data) {
+  data
+  //=> { name: 'LICENSE', size: 1077, content: 'The MIT License (MIT)\n\n...', ... }
 });
 ```
 
