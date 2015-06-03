@@ -7,15 +7,21 @@ var help = require('help-version')(usage()).help;
 
 
 function usage() {
-  return 'github-get <user> <repo> [<path>]';
+  return [
+    'Usage:  github-get [-l | --long] <user> <repo> [<path>]',
+    '',
+    'Options:',
+    '  --long, -l  Print full paths.'
+  ].join('\n');
 };
 
 
-var contentsToString = function (contents) {
+var contentsToString = function (contents, fullPaths) {
   if (Array.isArray(contents)) {
     return contents.map(function (file) {
       var mark = (file.type == 'dir') ? '/' : '';
-      return file.name + mark + '\n';
+      var path = fullPaths ? '/' + file.path : file.name;
+      return path + mark + '\n';
     }).join('');
   }
 
@@ -28,6 +34,11 @@ var contentsToString = function (contents) {
 
 
 (function (argv) {
+  if (argv[0] == '-l' || argv[0] == '--long') {
+    var fullPaths = true;
+    argv.shift();
+  }
+
   if (argv.length == 2) {
     argv.push('/');
   }
@@ -40,6 +51,6 @@ var contentsToString = function (contents) {
 
   function callback(err, contents) {
     if (err) throw err;
-    process.stdout.write(contentsToString(contents));
+    process.stdout.write(contentsToString(contents, fullPaths));
   }
 }(process.argv.slice(2)));

@@ -17,11 +17,11 @@ Fetch files and list directories via GitHub API.
 
 ## CLI
 
-### `github-get <user> <repo> [<path>]`
+### `github-get [-l | --long] <user> <repo> [<path>]`
 
 Lists directory or cats file contents at `<path>`.
 
-`<path>` defaults to `/`.
+With `--long`, prints full paths instead of relative names.
 
 ## Install
 
