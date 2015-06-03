@@ -7,6 +7,9 @@
   "bin": {
     "github-get": "cli.js"
   },
+  "scripts": {
+    "test": "tape test/*.js"
+  },
   "files": [
     "index.js",
     "cli.js"
@@ -33,5 +36,8 @@
     "gh-got": "^1.1.0",
     "help-version": "^0.2.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "rewire": "^2.3.3",
+    "tape": "^4.0.0"
+  }
 }

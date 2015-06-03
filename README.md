@@ -2,10 +2,12 @@
 
 # github-get
 
-[![Dependency Status][david-badge]][david]
+[![Build Status][travis-badge]][travis] [![Dependency Status][david-badge]][david]
 
 Fetch files and list directories via GitHub API.
 
+[travis]: https://travis-ci.org/eush77/github-get
+[travis-badge]: https://travis-ci.org/eush77/github-get.svg
 [david]: https://david-dm.org/eush77/github-get
 [david-badge]: https://david-dm.org/eush77/github-get.png
 
