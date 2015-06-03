@@ -11,6 +11,24 @@ Fetch files and list directories via GitHub API.
 [david]: https://david-dm.org/eush77/github-get
 [david-badge]: https://david-dm.org/eush77/github-get.png
 
+## Example
+
+```
+var githubGet = require('github-get');
+
+githubGet('octocat/git-consortium', function (err, data) {
+  data
+  //=> [{ name: 'LICENSE', type: 'file', size: 1077, ... },
+  //    { name: 'README.md', type: 'file, size: 306, ... },
+  //    { name: 'product-backlog.md', type: 'file', size: 13031, ... }]
+});
+
+githubGet('octocat/git-consortium', 'LICENSE', function (err, data) {
+  data
+  //=> { name: 'LICENSE', type: 'file', size: 1077, ... }
+});
+```
+
 ## API
 
 ### `githubGet(owner, repo, [path], [options], callback(err, data))`
