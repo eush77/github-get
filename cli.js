@@ -50,7 +50,10 @@ var contentsToString = function (contents, fullPaths) {
   githubGet.apply(null, argv);
 
   function callback(err, contents) {
-    if (err) throw err;
+    if (err) {
+      console.error(err.message);
+      return process.exit(1);
+    }
     process.stdout.write(contentsToString(contents, fullPaths));
   }
 }(process.argv.slice(2)));
