@@ -20,28 +20,35 @@ Fetches files and lists directories from GitHub repositories. Decodes base64.
 ```js
 var githubGet = require('github-get');
 
-githubGet('octocat/git-consortium', function (err, data) {
+githubGet('octocat/git-consortium', function (err, data, content) {
   data
   //=> [{ name: 'LICENSE', type: 'file', size: 1077, ... },
   //    { name: 'README.md', type: 'file', size: 306, ... },
   //    { name: 'product-backlog.md', type: 'file', size: 13031, ... }]
+  content
+  //=> [ 'LICENSE', 'README.md', 'product-backlog.md' ]
 });
 
-githubGet('octocat/git-consortium', 'LICENSE', function (err, data) {
+githubGet('octocat/git-consortium', 'LICENSE', function (err, data, content) {
   data
   //=> { name: 'LICENSE', size: 1077, content: 'VGhlIE1JVCBMaWNlbnNl...', ... }
+  content
+  //=> 'VGhlIE1JVCBMaWNlbnNl...'
 });
 
-githubGet('octocat/git-consortium', 'LICENSE', { decode: true }, function (err, data) {
+githubGet('octocat/git-consortium', 'LICENSE', { decode: true },
+          function (err, data, content) {
   data
   //=> { name: 'LICENSE', size: 1077, content: 'The MIT License (MIT)\n\n...', ... }
+  content
+  //=> 'The MIT License (MIT)\n\n...'
 });
 ```
 
 ## API
 
-### `githubGet(owner, repo, [path], [options], callback(err, data))`
-### `githubGet("owner/repo", [path], [options], callback(err, data))`
+### `githubGet(owner, repo, [path], [options], callback(err, data, content))`
+### `githubGet("owner/repo", [path], [options], callback(err, data, content))`
 
 #### `path`
 

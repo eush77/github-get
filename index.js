@@ -43,21 +43,36 @@ module.exports = function (/* owner, repo, path, options, cb */) {
 
   // If enabled, file content will be decoded.
   if (options.decode) {
+    var decode = true;
     delete options.decode;
-    var oldCb = cb;
-    cb = function (err, data) {
-      if (err) return oldCb(err);
-      if (data.content) {
-        try {
-          data.content = Buffer(data.content, data.encoding).toString();
-        }
-        catch (err) {
-          return oldCb(err);
-        }
-      }
-      return oldCb(null, data);
-    };
   }
 
-  github(['repos', owner, repo, 'contents', path].join('/'), options, cb);
+  github(['repos', owner, repo, 'contents', path].join('/'), options,
+         function (err, data) {
+           if (err) return cb(err);
+
+           var content;
+
+           // File.
+           if (data.content) {
+             if (decode) {
+               try {
+                 data.content = Buffer(data.content, data.encoding).toString();
+               }
+               catch (err) {
+                 return cb(err);
+               }
+             }
+             content = data.content;
+           }
+
+           // Directory.
+           else {
+             content = data.map(function (file) {
+               return file.name;
+             });
+           }
+
+           return cb(null, data, content);
+         });
 };

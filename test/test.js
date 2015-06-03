@@ -4,10 +4,19 @@ var test = require('tape'),
     rewire = require('rewire');
 
 
-var githubGet = rewire('..');
-githubGet.__set__('github', function (path, options, cb) {
-  cb(path, options);
+var githubGetRewired = rewire('..');
+githubGetRewired.__set__('github', function (path, options, cb) {
+  cb([path, options]);
 });
+
+// Runs githubGet logic up until gh-got call.
+var githubGet = function () {
+  var cb = arguments[arguments.length - 1];
+  arguments[arguments.length - 1] = function (result) {
+    cb.apply(null, result);
+  };
+  githubGetRewired.apply(this, arguments);
+};
 
 
 test('no path no options', function (t) {
