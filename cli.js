@@ -14,7 +14,8 @@ function usage() {
 var contentsToString = function (contents) {
   if (Array.isArray(contents)) {
     return contents.map(function (file) {
-      return file.name + '\n';
+      var mark = (file.type == 'dir') ? '/' : '';
+      return file.name + mark + '\n';
     }).join('');
   }
 
