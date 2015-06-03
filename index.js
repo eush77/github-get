@@ -41,5 +41,23 @@ module.exports = function (/* owner, repo, path, options, cb */) {
     }
   }, options);
 
+  // If enabled, file content will be decoded.
+  if (options.decode) {
+    delete options.decode;
+    var oldCb = cb;
+    cb = function (err, data) {
+      if (err) return oldCb(err);
+      if (data.content) {
+        try {
+          data.content = Buffer(data.content, data.encoding).toString();
+        }
+        catch (err) {
+          return oldCb(err);
+        }
+      }
+      return oldCb(null, data);
+    };
+  }
+
   github(['repos', owner, repo, 'contents', path].join('/'), options, cb);
 };

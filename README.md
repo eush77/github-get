@@ -38,18 +38,20 @@ githubGet('octocat/git-consortium', 'LICENSE', function (err, data) {
 
 Path to file in repository. Defaults to `/` (root).
 
+#### `options.decode`
+
+Boolean. If enabled, file contents will be decoded. No-op for directories. Defaults to `false`.
+
 #### `options.token`
 
-GitHub token for authentication. Unauthenticated requests to GitHub API are [limited][rate-limiting] to only 60 requests per hour.
-
-[Generate your token][new-token].
+GitHub token for authentication. Unauthenticated requests to GitHub API are [limited][rate-limiting] to only 60 requests per hour. Generate your token [here][new-token].
 
 [rate-limiting]: https://developer.github.com/v3/#rate-limiting
 [new-token]: https://github.com/settings/tokens/new
 
 #### `options.endpoint`
 
-Defaults to `https://api.github.com/`.
+API endpoint to talk to. Defaults to `https://api.github.com/`.
 
 ## CLI
 

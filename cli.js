@@ -25,11 +25,7 @@ var contentsToString = function (contents, fullPaths) {
     }).join('');
   }
 
-  if (contents.encoding != 'base64') {
-    throw new Error('Unknown encoding: ' + contents.encoding);
-  }
-
-  return Buffer(contents.content, 'base64').toString();
+  return contents.content;
 };
 
 
@@ -46,7 +42,7 @@ var contentsToString = function (contents, fullPaths) {
     return help(1);
   }
 
-  argv.push(callback);
+  argv.push({ decode: true }, callback);
   githubGet.apply(null, argv);
 
   function callback(err, contents) {
