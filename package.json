@@ -1,0 +1,32 @@
+{
+  "name": "github-get",
+  "version": "0.0.0",
+  "description": "Fetch files and list directories via GitHub API",
+  "author": "Eugene Sharygin <eush77@gmail.com>",
+  "license": "MIT",
+  "files": [
+    "index.js"
+  ],
+  "homepage": "https://github.com/eush77/github-get",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eush77/github-get"
+  },
+  "bugs": {
+    "url": "https://github.com/eush77/github-get/issues"
+  },
+  "keywords": [
+    "github",
+    "download",
+    "get",
+    "list",
+    "api",
+    "directory",
+    "file",
+    "repository"
+  ],
+  "dependencies": {
+    "gh-got": "^1.1.0"
+  },
+  "devDependencies": {}
+}
