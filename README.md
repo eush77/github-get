@@ -17,33 +17,32 @@ Fetches files and lists directories from GitHub repositories. Decodes base64.
 
 ## Example
 
-```js
-var githubGet = require('github-get');
-
-githubGet('octocat/git-consortium', function (err, data, content) {
-  data
-  //=> [{ name: 'LICENSE', type: 'file', size: 1077, ... },
-  //    { name: 'README.md', type: 'file', size: 306, ... },
-  //    { name: 'product-backlog.md', type: 'file', size: 13031, ... }]
-  content
-  //=> [ 'LICENSE', 'README.md', 'product-backlog.md' ]
-});
-
-githubGet('octocat/git-consortium', 'LICENSE', function (err, data, content) {
-  data
-  //=> { name: 'LICENSE', size: 1077, content: 'VGhlIE1JVCBMaWNlbnNl...', ... }
-  content
-  //=> 'VGhlIE1JVCBMaWNlbnNl...'
-});
-
-githubGet('octocat/git-consortium', 'LICENSE', { decode: true },
-          function (err, data, content) {
-  data
-  //=> { name: 'LICENSE', size: 1077, content: 'The MIT License (MIT)\n\n...', ... }
-  content
-  //=> 'The MIT License (MIT)\n\n...'
-});
 ```
+$ github-get eush77 github-get
+.gitignore
+.travis.yml
+LICENSE
+README.md
+cli.js
+index.js
+package.json
+test/
+
+$ github-get eush77 github-get test/test.js
+'use strict';
+
+var test = require('tape'),
+    rewire = require('rewire');
+# ...
+```
+
+## CLI
+
+### `github-get [-l | --long] <user> <repo> [<path>]`
+
+Lists directory or cats file contents at `<path>`.
+
+With `--long`, prints full paths instead of relative names.
 
 ## API
 
@@ -68,14 +67,6 @@ GitHub token for authentication. Unauthenticated requests to GitHub API are [lim
 #### `options.endpoint`
 
 API endpoint to talk to. Defaults to `https://api.github.com/`.
-
-## CLI
-
-### `github-get [-l | --long] <user> <repo> [<path>]`
-
-Lists directory or cats file contents at `<path>`.
-
-With `--long`, prints full paths instead of relative names.
 
 ## Install
 
