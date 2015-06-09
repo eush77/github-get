@@ -4,6 +4,7 @@
   "description": "Fetch files and list directories from GitHub repositories",
   "author": "Eugene Sharygin <eush77@gmail.com>",
   "license": "MIT",
+  "preferGlobal": true,
   "bin": {
     "github-get": "cli.js"
   },
@@ -28,6 +29,7 @@
     "list",
     "get",
     "download",
+    "fetch",
     "api",
     "dir",
     "directory",
