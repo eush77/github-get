@@ -27,7 +27,9 @@ README.md
 cli.js
 index.js
 package.json
+```
 
+```
 $ github-get eush77 github-get test/test.js
 'use strict';
 
