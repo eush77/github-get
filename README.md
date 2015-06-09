@@ -19,6 +19,7 @@ Fetches files and lists directories from GitHub repositories. Decodes base64.
 
 ```
 $ github-get eush77 github-get
+test/
 .gitignore
 .travis.yml
 LICENSE
@@ -26,7 +27,6 @@ README.md
 cli.js
 index.js
 package.json
-test/
 
 $ github-get eush77 github-get test/test.js
 'use strict';
