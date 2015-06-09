@@ -33,6 +33,7 @@
     "repository"
   ],
   "dependencies": {
+    "cmpby": "^0.1.0",
     "gh-got": "^1.1.0",
     "help-version": "^0.2.0",
     "object.assign": "^3.0.0"

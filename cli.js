@@ -3,7 +3,8 @@
 
 var githubGet = require('./');
 
-var help = require('help-version')(usage()).help;
+var help = require('help-version')(usage()).help,
+    cmpby = require('cmpby');
 
 
 function usage() {
@@ -16,16 +17,19 @@ function usage() {
 };
 
 
-var contentsToString = function (contents, fullPaths) {
-  if (Array.isArray(contents)) {
-    return contents.map(function (file) {
-      var mark = (file.type == 'dir') ? '/' : '';
-      var path = fullPaths ? '/' + file.path : file.name;
-      return path + mark + '\n';
-    }).join('');
-  }
+var listDirectory = function (directory, opts) {
+  opts = opts || {};
 
-  return contents.content;
+  return directory
+    .sort(cmpby(function (file) {
+      // Put directories first.
+      return file.type != 'dir';
+    }))
+    .map(function (file) {
+      var mark = (file.type == 'dir') ? '/' : '';
+      var path = opts.fullPaths ? '/' + file.path : file.name;
+      return path + mark;
+    });
 };
 
 
@@ -45,11 +49,17 @@ var contentsToString = function (contents, fullPaths) {
   argv.push({ decode: true }, callback);
   githubGet.apply(null, argv);
 
-  function callback(err, contents) {
+  function callback(err, data, contents) {
     if (err) {
       console.error(err.message);
       return process.exit(1);
     }
-    process.stdout.write(contentsToString(contents, fullPaths));
+
+    if (Array.isArray(data)) {
+      console.log(listDirectory(data, { fullPaths: fullPaths }).join('\n'));
+    }
+    else {
+      process.stdout.write(contents);
+    }
   }
 }(process.argv.slice(2)));
