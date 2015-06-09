@@ -26,9 +26,9 @@ var listDirectory = function (directory, opts) {
       return file.type != 'dir';
     }))
     .map(function (file) {
-      var mark = (file.type == 'dir') ? '/' : '';
-      var path = opts.fullPaths ? '/' + file.path : file.name;
-      return path + mark;
+      var path = file[opts.fullPaths ? 'path' : 'name'];
+      var suffix = (file.type == 'dir') ? '/' : '';
+      return path + suffix;
     });
 };
 
