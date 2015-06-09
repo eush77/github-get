@@ -48,7 +48,7 @@ var listDirectory = function (directory, opts) {
     return help(1);
   }
 
-  argv.push({ decode: true }, callback);
+  argv.push(callback);
   githubGet.apply(null, argv);
 
   function callback(err, data, contents) {

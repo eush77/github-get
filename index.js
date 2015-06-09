@@ -42,7 +42,7 @@ module.exports = function (/* owner, repo, path, options, cb */) {
   }, options);
 
   // If enabled, file content will be decoded.
-  if (options.decode) {
+  if (options.decode == null || options.decode) {
     var decode = true;
     delete options.decode;
   }

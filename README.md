@@ -57,7 +57,7 @@ Path to file in repository. Defaults to `/` (root).
 
 #### `options.decode`
 
-Boolean. If enabled, file contents will be decoded. No-op for directories. Defaults to `false`.
+Boolean. If enabled, file contents will be decoded. No-op for directories. Defaults to `true`.
 
 #### `options.token`
 
