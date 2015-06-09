@@ -4,7 +4,8 @@
 var githubGet = require('./');
 
 var help = require('help-version')(usage()).help,
-    cmpby = require('cmpby');
+    cmpby = require('cmpby'),
+    chalk = require('chalk');
 
 
 function usage() {
@@ -27,8 +28,9 @@ var listDirectory = function (directory, opts) {
     }))
     .map(function (file) {
       var path = file[opts.fullPaths ? 'path' : 'name'];
-      var suffix = (file.type == 'dir') ? '/' : '';
-      return path + suffix;
+      return file.type == 'dir'
+        ? chalk.bold.blue(path) + '/'
+        : path;
     });
 };
 
