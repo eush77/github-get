@@ -24,10 +24,12 @@
   },
   "keywords": [
     "github",
-    "download",
-    "get",
+    "ls",
     "list",
+    "get",
+    "download",
     "api",
+    "dir",
     "directory",
     "file",
     "repository"
