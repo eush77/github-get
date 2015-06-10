@@ -1,6 +1,6 @@
 {
   "name": "github-get",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Fetch files and list directories from GitHub repositories",
   "author": "Eugene Sharygin <eush77@gmail.com>",
   "license": "MIT",
