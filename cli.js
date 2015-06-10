@@ -4,8 +4,7 @@
 var githubGet = require('./');
 
 var help = require('help-version')(usage()).help,
-    cmpby = require('cmpby'),
-    chalk = require('chalk');
+    lsView = require('ls-view');
 
 
 function usage() {
@@ -19,19 +18,12 @@ function usage() {
 
 
 var listDirectory = function (directory, opts) {
-  opts = opts || {};
-
-  return directory
-    .sort(cmpby(function (file) {
-      // Put directories first.
-      return file.type != 'dir';
-    }))
-    .map(function (file) {
-      var path = file[opts.fullPaths ? 'path' : 'name'];
-      return file.type == 'dir'
-        ? chalk.bold.blue(path) + '/'
-        : path;
-    });
+  return lsView(directory.map(function (file) {
+    return {
+      name: opts.fullPaths ? file.path : file.name,
+      type: file.type == 'dir' ? 'directory' : 'file'
+    };
+  }));
 };
 
 
@@ -58,7 +50,7 @@ var listDirectory = function (directory, opts) {
     }
 
     if (Array.isArray(data)) {
-      console.log(listDirectory(data, { fullPaths: fullPaths }).join('\n'));
+      console.log(listDirectory(data, { fullPaths: fullPaths }));
     }
     else {
       process.stdout.write(contents);

@@ -37,10 +37,9 @@
     "repository"
   ],
   "dependencies": {
-    "chalk": "^1.0.0",
-    "cmpby": "^0.1.0",
     "gh-got": "^1.1.0",
     "help-version": "^0.2.0",
+    "ls-view": "^0.1.0",
     "object.assign": "^3.0.0"
   },
   "devDependencies": {
