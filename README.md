@@ -55,6 +55,14 @@ With `--long`, prints full paths instead of relative names.
 
 Path to file in repository. Defaults to `/` (root).
 
+#### `data`
+
+Data returned by GitHub API. Object or array of objects, depending on whether file is a directory.
+
+#### `content`
+
+File contents (array) or directory listing.
+
 #### `options.decode`
 
 Boolean. If enabled, file contents will be decoded. No-op for directories. Defaults to `true`.
@@ -70,10 +78,16 @@ GitHub token for authentication. Unauthenticated requests to GitHub API are [lim
 
 API endpoint to talk to. Defaults to `https://api.github.com/`.
 
+## Related
+
+- [npm-get] — fetch files and list directories from npm packages.
+
+[npm-get]: https://github.com/eush77/npm-get
+
 ## Install
 
 ```
-npm install github-get
+npm install -g github-get
 ```
 
 ## License
