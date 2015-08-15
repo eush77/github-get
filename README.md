@@ -40,11 +40,13 @@ var test = require('tape'),
 
 ## CLI
 
-### `github-get [-l | --long] <user> <repo> [<path>]`
+### `github-get [-l | --long] [--pager] <user> <repo> [<path>]`
 
 Lists directory or cats file contents at `<path>`.
 
 With `--long`, prints full paths instead of relative names.
+
+With `--pager`, shows result in a `$PAGER`. This is not equivalent to `github-get ... | $PAGER`. Instead, the pager gets the file name argument which allows for syntax highlighting (e.g. via `$LESSOPEN` hook).
 
 ## API
 

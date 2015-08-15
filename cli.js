@@ -4,17 +4,33 @@
 var githubGet = require('./');
 
 var help = require('help-version')(usage()).help,
-    lsView = require('ls-view');
+    lsView = require('ls-view'),
+    filePager = require('file-pager'),
+    minimist = require('minimist');
 
 
 function usage() {
   return [
-    'Usage:  github-get [-l | --long] <user> <repo> [<path>]',
+    'Usage:  github-get [-l | --long] [--pager] <user> <repo> [<path>]',
     '',
     'Options:',
-    '  --long, -l  Print full paths.'
+    '  --long, -l  Print full paths.',
+    '  --pager     Open in pager.'
   ].join('\n');
 };
+
+
+var opts = minimist(process.argv.slice(2), {
+  boolean: ['long', 'pager'],
+  alias: {
+    long: 'l'
+  },
+  unknown: function (opt) {
+    if (opt[0] == '-') {
+      help(1);
+    }
+  }
+});
 
 
 var listDirectory = function (directory, opts) {
@@ -27,12 +43,7 @@ var listDirectory = function (directory, opts) {
 };
 
 
-(function (argv) {
-  if (argv[0] == '-l' || argv[0] == '--long') {
-    var fullPaths = true;
-    argv.shift();
-  }
-
+(function (opts, argv) {
   if (argv.length == 2) {
     argv.push('/');
   }
@@ -50,10 +61,14 @@ var listDirectory = function (directory, opts) {
     }
 
     if (Array.isArray(data)) {
-      console.log(listDirectory(data, { fullPaths: fullPaths }));
+      console.log(listDirectory(data, { fullPaths: opts.long }));
+    }
+    else if (opts.pager) {
+      filePager({ basename: data.path })
+        .end(contents);
     }
     else {
       process.stdout.write(contents);
     }
   }
-}(process.argv.slice(2)));
+}(opts, opts._));
