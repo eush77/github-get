@@ -64,7 +64,7 @@ var listDirectory = function (directory, opts) {
       console.log(listDirectory(data, { fullPaths: opts.long }));
     }
     else if (opts.pager) {
-      filePager({ basename: data.path })
+      filePager({ basename: encodeURIComponent(data.path) })
         .end(contents);
     }
     else {
