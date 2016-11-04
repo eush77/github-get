@@ -76,6 +76,6 @@ module.exports = function (githubPath, options, cb) {
              });
            }
 
-           return cb(null, data, content);
+           return cb(null, content, data);
          });
 };

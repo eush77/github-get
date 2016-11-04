@@ -23,7 +23,7 @@ Fetch files or list directories from GitHub repositories.
 If given a directory path, returns directory listing:
 
 ```js
-githubGet('eush77/github-get', function (err, data, files) {
+githubGet('eush77/github-get', function (err, files) {
     if (err) throw err;
     console.log(files);
 })
@@ -41,7 +41,7 @@ githubGet('eush77/github-get', function (err, data, files) {
 If given a file path, returns file contents:
 
 ```js
-githubGet('eush77/github-get/package.json', function (err, data, pkg) {
+githubGet('eush77/github-get/package.json', function (err, pkg) {
     if (err) throw err;
     console.log(JSON.parse(pkg).description);
 })
@@ -52,7 +52,7 @@ githubGet('eush77/github-get/package.json', function (err, data, pkg) {
 All data returned from GitHub API is also available:
 
 ```js
-githubGet('eush77/github-get/package.json', function (err, data, pkg) {
+githubGet('eush77/github-get/package.json', function (err, pkg, data) {
     if (err) throw err;
     console.log(data.download_url);
 })
@@ -62,7 +62,7 @@ githubGet('eush77/github-get/package.json', function (err, data, pkg) {
 
 ## API
 
-### `githubGet(["owner/repository[/path]"], [options], callback(err, data, content))`
+### `githubGet(["owner/repository[/path]"], [options], callback(err, content, data))`
 
 #### Options
 
@@ -77,13 +77,13 @@ option | description | default value
 
 `owner`, `repository`, and `path` can either be specified in a path string (first argument) or in the `options`.
 
-#### `data`
-
-Data returned by GitHub API. Object or array of objects, depending on whether path is to a file or a directory.
-
 #### `content`
 
 File contents (array) or directory listing.
+
+#### `data`
+
+Data returned by GitHub API. Object or array of objects, depending on whether path is to a file or a directory.
 
 [rate-limiting]: https://developer.github.com/v3/#rate-limiting
 [new-token]: https://github.com/settings/tokens/new
