@@ -4,16 +4,11 @@
   "description": "Fetch files and list directories from GitHub repositories",
   "author": "Eugene Sharygin <eush77@gmail.com>",
   "license": "MIT",
-  "preferGlobal": true,
-  "bin": {
-    "github-get": "cli.js"
-  },
   "scripts": {
     "test": "tape test/*.js"
   },
   "files": [
-    "index.js",
-    "cli.js"
+    "index.js"
   ],
   "homepage": "https://github.com/eush77/github-get",
   "repository": {
@@ -37,11 +32,7 @@
     "repository"
   ],
   "dependencies": {
-    "file-pager": "^0.1.0",
     "gh-got": "^1.1.0",
-    "help-version": "^0.2.0",
-    "ls-view": "^0.1.0",
-    "minimist": "^1.1.3",
     "object.assign": "^3.0.0"
   },
   "devDependencies": {

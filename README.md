@@ -2,9 +2,11 @@
 
 # github-get
 
-[![Build Status][travis-badge]][travis] [![Dependency Status][david-badge]][david]
+[![Build Status][travis-badge]][travis]
+[![Dependency Status][david-badge]][david]
+[![CLI Module][cli-badge]][github-get-cli]
 
-Fetches files and lists directories from GitHub repositories. Decodes base64.
+Fetch files or list directories from GitHub repositories.
 
 [Relevant GitHub API section.][api-section]
 
@@ -14,54 +16,66 @@ Fetches files and lists directories from GitHub repositories. Decodes base64.
 [travis-badge]: https://travis-ci.org/eush77/github-get.svg
 [david]: https://david-dm.org/eush77/github-get
 [david-badge]: https://david-dm.org/eush77/github-get.png
+[cli-badge]: https://img.shields.io/badge/cli-github--get--cli-blue.svg "CLI Module"
 
 ## Example
 
-```
-$ github-get eush77 github-get
-test/
-.gitignore
-.travis.yml
-LICENSE
-README.md
-cli.js
-index.js
-package.json
-```
+If given a directory path, returns directory listing:
 
-```
-$ github-get eush77 github-get test/test.js
-'use strict';
+```js
+githubGet('eush77/github-get', function (err, data, files) {
+    if (err) throw err;
+    console.log(files);
+})
 
-var test = require('tape'),
-    rewire = require('rewire');
-# ...
+//=> [ '.gitignore',
+//     '.travis.yml',
+//     'LICENSE',
+//     'README.md',
+//     'cli.js',
+//     'index.js',
+//     'package.json',
+//     'test' ]
 ```
 
-## CLI
+If given a file path, returns file contents:
 
-### `github-get [-l | --long] [--pager] <user> <repo> [<path>]`
+```js
+githubGet('eush77/github-get/package.json', function (err, data, pkg) {
+    if (err) throw err;
+    console.log(JSON.parse(pkg).description);
+})
 
-Lists directory or cats file contents at `<path>`.
+//=> 'Fetch files and list directories from GitHub repositories'
+```
 
-With `--long`, prints full paths instead of relative names.
+All data returned from GitHub API is also available:
 
-With `--pager`, shows result in a `$PAGER`. This is not equivalent to `github-get ... | $PAGER`. Instead, the pager gets the file name argument which allows for syntax highlighting (e.g. via `$LESSOPEN` hook).
+```js
+githubGet('eush77/github-get/package.json', function (err, data, pkg) {
+    if (err) throw err;
+    console.log(data.download_url);
+})
+
+//=> 'https://raw.githubusercontent.com/eush77/github-get/master/package.json'
+```
 
 ## API
 
-### `githubGet(["owner/repo[/path]"], [options], callback(err, data, content))`
+### `githubGet(["owner/repository[/path]"], [options], callback(err, data, content))`
 
 #### Options
 
 option | description | default value
 :----: | ----------- | :-----------:
 `owner` | Owner of the repository (user/organization) |
-`repo` | Repository name |
+`repository` | Repository name |
 `path` | Path to file or directory in the repository | `/` (root)
 `decode` | Whether file contents should be decoded. No-op for directories | `true`
 `token` | GitHub token for authentication. Unauthenticated requests to GitHub API are [limited][rate-limiting] to 60 requests per hour. Generate your token [here][new-token] |
 `endpoint` | API endpoint | https://api.github.com/
+
+`owner`, `repository`, and `path` can either be specified in a path string (first argument) or in the `options`.
 
 #### `data`
 
@@ -74,16 +88,27 @@ File contents (array) or directory listing.
 [rate-limiting]: https://developer.github.com/v3/#rate-limiting
 [new-token]: https://github.com/settings/tokens/new
 
+## CLI
+
+Install [github-get-cli]:
+
+```sh
+$ npm install -g github-get-cli
+$ github-get --help
+```
+
 ## Related
 
+- [github-get-cli] — CLI for this module.
 - [npm-get] — fetch files and list directories from npm packages.
 
+[github-get-cli]: https://github.com/eush77/github-get-cli
 [npm-get]: https://github.com/eush77/npm-get
 
 ## Install
 
 ```
-npm install -g github-get
+npm install github-get
 ```
 
 ## License
