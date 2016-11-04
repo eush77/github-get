@@ -1,45 +1,48 @@
 'use strict';
 
+var splitGithubPath = require('./lib/split-github-path');
+
 var github = require('gh-got'),
     assign = require('object.assign');
 
 
-module.exports = function (/* owner, repo, path, options, cb */) {
-  var args = [].slice.call(arguments);
-
-  // Callback is always last.
-  var cb = args.pop();
-
-  // Owner/repo may be one or two arguments.
-  var owner = args.shift();
-  var slash = owner.indexOf('/');
-  if (slash >= 0) {
-    args.unshift(owner.slice(slash + 1));
-    owner = owner.slice(0, slash);
-  }
-  var repo = args.shift();
-
-  // Remove leading slash from path.
-  var path = args.shift();
-  if (typeof path != 'string') {
-    args.unshift(path);
-    path = '';
-  }
-  else if (path[0] == '/') {
-    path = path.slice(1);
+module.exports = function (githubPath, options, cb) {
+  if (typeof githubPath != 'string') {
+    // Shift arguments.
+    cb = options;
+    options = githubPath;
+    githubPath = null;
   }
 
-  // Mix in predefined options.
-  var options = args.shift();
   if (typeof options != 'object') {
+    // Shift arguments.
+    cb = options;
     options = {};
   }
-  options = assign({
+
+  // Mix in all options.
+  var defaults = {
     json: true,
     headers: {
       'User-Agent': 'github-get'
     }
-  }, options);
+  };
+  options = assign(defaults,
+                   githubPath ? splitGithubPath(githubPath) : {},
+                   options);
+
+  // Extract specific options.
+  var owner = options.owner;
+  var repo = options.repository;
+  var path = options.path;
+  delete options.owner;
+  delete options.repository;
+  delete options.path;
+
+  // If path has a leading `/`, remove it.
+  if (path && path[0] == '/') {
+      path = path.slice(1);
+  }
 
   // If enabled, file content will be decoded.
   if (options.decode == null || options.decode) {

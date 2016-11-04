@@ -50,35 +50,29 @@ With `--pager`, shows result in a `$PAGER`. This is not equivalent to `github-ge
 
 ## API
 
-### `githubGet(owner, repo, [path], [options], callback(err, data, content))`
-### `githubGet("owner/repo", [path], [options], callback(err, data, content))`
+### `githubGet(["owner/repo[/path]"], [options], callback(err, data, content))`
 
-#### `path`
+#### Options
 
-Path to file in repository. Defaults to `/` (root).
+option | description | default value
+:----: | ----------- | :-----------:
+`owner` | Owner of the repository (user/organization) |
+`repo` | Repository name |
+`path` | Path to file or directory in the repository | `/` (root)
+`decode` | Whether file contents should be decoded. No-op for directories | `true`
+`token` | GitHub token for authentication. Unauthenticated requests to GitHub API are [limited][rate-limiting] to 60 requests per hour. Generate your token [here][new-token] |
+`endpoint` | API endpoint | https://api.github.com/
 
 #### `data`
 
-Data returned by GitHub API. Object or array of objects, depending on whether file is a directory.
+Data returned by GitHub API. Object or array of objects, depending on whether path is to a file or a directory.
 
 #### `content`
 
 File contents (array) or directory listing.
 
-#### `options.decode`
-
-Boolean. If enabled, file contents will be decoded. No-op for directories. Defaults to `true`.
-
-#### `options.token`
-
-GitHub token for authentication. Unauthenticated requests to GitHub API are [limited][rate-limiting] to only 60 requests per hour. Generate your token [here][new-token].
-
 [rate-limiting]: https://developer.github.com/v3/#rate-limiting
 [new-token]: https://github.com/settings/tokens/new
-
-#### `options.endpoint`
-
-API endpoint to talk to. Defaults to `https://api.github.com/`.
 
 ## Related
 

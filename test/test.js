@@ -20,10 +20,12 @@ var githubGet = function () {
 
 
 test('no path no options', function (t) {
-  t.plan(4);
+  t.plan(8);
 
-  githubGet('owner', 'repo', callback);
   githubGet('owner/repo', callback);
+  githubGet('owner/repo/', callback);
+  githubGet({ owner: 'owner', repository: 'repo' }, callback);
+  githubGet({ owner: 'owner', repository: 'repo', path: '/' }, callback);
 
   function callback(path, options) {
     t.equal(path, 'repos/owner/repo/contents/');
@@ -33,10 +35,13 @@ test('no path no options', function (t) {
 
 
 test('path no options', function (t) {
-  t.plan(4);
+  t.plan(6);
 
-  githubGet('owner', 'repo', '/some/file', callback);
-  githubGet('owner/repo', '/some/file', callback);
+  githubGet('owner/repo/some/file', callback);
+  githubGet({ owner: 'owner', repository: 'repo', path: 'some/file' },
+            callback);
+  githubGet({ owner: 'owner', repository: 'repo', path: '/some/file' },
+            callback);
 
   function callback(path, options) {
     t.equal(path, 'repos/owner/repo/contents/some/file');
@@ -48,8 +53,8 @@ test('path no options', function (t) {
 test('no path options', function (t) {
   t.plan(4);
 
-  githubGet('owner', 'repo', { token: 'token' }, callback);
   githubGet('owner/repo', { token: 'token' }, callback);
+  githubGet({ owner: 'owner', repository: 'repo', token: 'token' }, callback);
 
   function callback(path, options) {
     t.equal(path, 'repos/owner/repo/contents/');
@@ -61,8 +66,9 @@ test('no path options', function (t) {
 test('path options', function (t) {
   t.plan(4);
 
-  githubGet('owner', 'repo', 'some/file', { token: 'token' }, callback);
-  githubGet('owner/repo', 'some/file', { token: 'token' }, callback);
+  githubGet('owner/repo/some/file', { token: 'token' }, callback);
+  githubGet({ owner: 'owner', repository: 'repo', path: '/some/file',
+              token: 'token' }, callback);
 
   function callback(path, options) {
     t.equal(path, 'repos/owner/repo/contents/some/file');
