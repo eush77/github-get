@@ -74,7 +74,6 @@ option | description | default value
 `owner` | Owner of the repository (user/organization) |
 `repository` | Repository name |
 `path` | Path to file or directory in the repository | `/` (root)
-`decode` | Whether file contents should be decoded. No-op for directories | `true`
 `token` | GitHub token for authentication. Unauthenticated requests to GitHub API are [limited][rate-limiting] to 60 requests per hour. Generate your token [here][new-token] |
 `endpoint` | API endpoint | https://api.github.com/
 

@@ -44,12 +44,6 @@ module.exports = function (githubPath, options, cb) {
       path = path.slice(1);
   }
 
-  // If enabled, file content will be decoded.
-  if (options.decode == null || options.decode) {
-    var decode = true;
-    delete options.decode;
-  }
-
   github(['repos', owner, repo, 'contents', path].join('/'), options,
          function (err, data) {
            if (err) return cb(err);
@@ -58,15 +52,13 @@ module.exports = function (githubPath, options, cb) {
 
            // File.
            if (data.content) {
-             if (decode) {
-               try {
-                 data.content = Buffer(data.content, data.encoding).toString();
-               }
-               catch (err) {
-                 return cb(err);
-               }
+             try {
+               content = data.content =
+                 Buffer(data.content, data.encoding).toString();
              }
-             content = data.content;
+             catch (err) {
+               return cb(err);
+             }
            }
 
            // Directory.
