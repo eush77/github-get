@@ -3,6 +3,7 @@
 # github-get
 
 [![Build Status][travis-badge]][travis]
+[![Coverage Status][coveralls-badge]][coveralls]
 [![Dependency Status][david-badge]][david]
 [![CLI Module][cli-badge]][github-get-cli]
 
@@ -13,7 +14,9 @@ Fetch files or list directories from GitHub repositories.
 [api-section]: https://developer.github.com/v3/repos/contents/#get-contents
 
 [travis]: https://travis-ci.org/eush77/github-get
-[travis-badge]: https://travis-ci.org/eush77/github-get.svg
+[travis-badge]: https://travis-ci.org/eush77/github-get.svg?branch=master
+[coveralls]: https://coveralls.io/github/eush77/github-get?branch=master
+[coveralls-badge]: https://coveralls.io/repos/eush77/github-get/badge.svg?branch=master&service=github
 [david]: https://david-dm.org/eush77/github-get
 [david-badge]: https://david-dm.org/eush77/github-get.png
 [cli-badge]: https://img.shields.io/badge/cli-github--get--cli-blue.svg "CLI Module"

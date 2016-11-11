@@ -5,7 +5,8 @@
   "author": "Eugene Sharygin <eush77@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "tape test/*.js"
+    "test": "nyc --reporter=text --reporter=html tape test/*.js",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "files": [
     "index.js"
@@ -36,6 +37,8 @@
     "object.assign": "^3.0.0"
   },
   "devDependencies": {
+    "coveralls": "^2.11.15",
+    "nyc": "^8.4.0",
     "rewire": "^2.3.3",
     "tape": "^4.0.0"
   }
