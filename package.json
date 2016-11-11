@@ -9,7 +9,8 @@
     "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "lib/"
   ],
   "homepage": "https://github.com/eush77/github-get",
   "repository": {
